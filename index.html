@@ -247,9 +247,9 @@
   }
   .table th:nth-child(1), .table td:nth-child(1) { width: 30%; }
   .table th:nth-child(2), .table td:nth-child(2) { width: 15%; }
-  .table th:nth-child(3), .table td:nth-child(3) { width: 35%; }
+  .table th:nth-child(3), .table td:nth-child(3) { width: 30%; }
   .table th:nth-child(4), .table td:nth-child(4) { width: 15%; }
-  .table th:nth-child(5), .table td:nth-child(5) { width: 5%; }
+  .table th:nth-child(5), .table td:nth-child(5) { width: 10%; text-align: center; white-space: nowrap; }
 
   /* Pagamento */
   .pay-badges .form-check {
@@ -369,6 +369,10 @@
     footer { padding: 12px 0; font-size: 0.8rem; }
     .footer-contact { gap: 10px; flex-direction: column; }
     .ticker-text { font-size: 0.75rem; animation-duration: 18s; }
+    .table-responsive { overflow-x: auto; } /* Adicionado para permitir scroll horizontal em mobile */
+    .table th:nth-child(3), .table td:nth-child(3) { width: 30%; } /* Ajustado para mobile */
+    .table th:nth-child(5), .table td:nth-child(5) { width: 10%; } /* Aumentado para evitar corte */
+    .btn-remover { padding: 5px; } /* Reduzido padding para caber melhor */
   }
 </style>
 </head>
@@ -680,18 +684,20 @@
 <!-- Carrinho -->
 <section id="carrinho" class="container mt-4 mb-5">
   <h3>Carrinho</h3>
-  <table class="table table-striped table-bordered align-middle">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Qtd</th>
-        <th>Extras / Remover</th>
-        <th>Preço</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody id="corpoCarrinho"></tbody>
-  </table>
+  <div class="table-responsive"> <!-- Adicionado wrapper para responsividade -->
+    <table class="table table-striped table-bordered align-middle">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qtd</th>
+          <th>Extras / Remover</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="corpoCarrinho"></tbody>
+    </table>
+  </div>
   <p id="total" class="fw-bold">Total: €0,00</p>
 
   <!-- Dados do cliente -->
@@ -875,7 +881,7 @@
           <div><strong>➖ Remover:</strong> ${retirarTxt}</div>
         </td>
         <td>${euro(item.precoTotal)}</td>
-        <td><button class="btn btn-sm btn-remover" onclick="removerItem(${idx})" aria-label="Remover ${item.nome} do carrinho">Remover</button></td>
+        <td><button class="btn btn-sm btn-remover" onclick="removerItem(${idx})" aria-label="Remover ${item.nome} do carrinho"><i class="fas fa-trash"></i></button></td>
       `;
       corpo.appendChild(tr);
     });
