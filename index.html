@@ -1,1021 +1,798 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Baruch Burguer - Cardápio Completo</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baruch Burguer - Cardápio Completo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gagalin&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #2b2424;
+      color: #f0e6dc;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
-  body {
-    background: #2b2424;
-    color: #ffffff;
-    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-  }
+    /* Header */
+    .navbar {
+      background: #1e1a1a;
+      padding: 15px 0;
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+    }
+    .navbar-brand img {
+      height: 100px;
+      max-width: 100%;
+      transition: transform 0.3s;
+    }
+    .navbar-brand img:hover {
+      transform: scale(1.05);
+    }
+    .nav-icons a {
+      color: #facc15;
+      font-size: 1.3rem;
+      margin-left: 20px;
+      transition: color 0.3s;
+    }
+    .nav-icons a:hover {
+      color: #d97706;
+    }
 
-  /* Splash Screen */
-  #splash {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #2b2424;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-  #splash img {
-    width: 120px;
-    animation: spin 2s linear;
-  }
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+      background: #1e1a1a;
+    }
+    .hero h2 {
+      font-family: 'Gagalin', cursive;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 15px;
+      color: #facc15;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #ddd;
+    }
 
-  /* Navbar */
-  .navbar {
-    background-color: #d97706;
-    padding: 8px 0;
-  }
-  .navbar-brand {
-    color: #ffffff !important;
-    font-size: 1rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-  }
-  .navbar-brand img {
-    height: 30px;
-    margin-right: 8px;
-  }
-  .contact-group {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    margin-left: auto;
-    align-items: center;
-  }
-  .btn-contact {
-    font-size: 0.85rem;
-    padding: 6px 10px;
-    background-color: #d97706;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 6px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-  }
-  .btn-contact:hover, .btn-contact:active {
-    background-color: #b45309;
-    transform: scale(1.05);
-  }
-  .btn-contact i {
-    font-size: 0.85rem;
-    width: 16px;
-    text-align: center;
-  }
-  .btn-contact span {
-    transition: transform 0.2s ease;
-  }
-  .btn-contact:hover span, .btn-contact:active span {
-    transform: scale(1.05);
-  }
+    /* Highlight Card Animation */
+    @keyframes subtleZoom {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .highlight-card {
+      background: #fff7e6;
+      border-left: 8px solid #d97706;
+      color: #333;
+      animation: subtleZoom 3s ease-in-out infinite;
+    }
+    .highlight-card h3 {
+      font-size: 1.8rem;
+    }
+    .highlight-card img {
+      max-width: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
 
-  /* Hero */
-  .hero {
-    background: #f5f5f5;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 10px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    color: #1a1a1a;
-  }
-  .hero img {
-    height: 80px;
-    max-width: 160px;
-    margin-bottom: 8px;
-  }
-  .hero h2 {
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-    font-weight: 700;
-  }
-  .hero p {
-    font-size: 0.85rem;
-  }
+    /* Cards */
+    .card {
+      background: #3c2f2f;
+      border: none;
+      color: #fff;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      text-align: center;
+    }
+    .card-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .card-text {
+      font-size: 1rem;
+      color: #facc15;
+      font-weight: bold;
+    }
 
-  /* Cardápio */
-  .card {
-    background: #f5f5f5;
-    color: #1a1a1a;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    margin-bottom: 12px;
-  }
-  .card img {
-    height: 160px;
-    object-fit: cover;
-    border-radius: 8px 8px 0 0;
-  }
-  .card-body {
-    padding: 10px;
-  }
-  .card-title {
-    font-size: 1.1rem;
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-  .text-success {
-    font-size: 0.95rem;
-    color: #2b2424 !important;
-  }
+    /* Cart Button */
+    .cart-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #ffca28;
+      color: #1e1a1a;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 12px 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+    .cart-btn:hover {
+      transform: scale(1.1);
+    }
 
-  .quantidade {
-    width: 45px;
-    text-align: center;
-    font-size: 0.9rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 2px;
-  }
+    /* Cart Items */
+    #cartItems .cart-item {
+      background: rgba(255, 247, 230, 0.9);
+      border: 1px solid #d97706;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    #cartItems .cart-item strong,
+    #cartItems .cart-item span {
+      color: #1e1a1a;
+    }
+    #cartItems .cart-item .item-price {
+      color: #d97706;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
 
-  .btn-primary, .btn-contact, .btn-danger {
-    background-color: #d97706;
-    color: #ffffff;
-    border: none;
-    padding: 6px 10px;
-    font-size: 0.85rem;
-    min-height: 40px;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-  }
-  .btn-primary:hover, .btn-contact:hover, .btn-danger:hover {
-    background-color: #b45309;
-  }
-  .btn-secondary {
-    font-size: 0.85rem;
-    padding: 5px 8px;
-    min-height: 34px;
-    background-color: #f5f5f5;
-    color: #1a1a1a;
-    border: 1px solid #d97706;
-  }
-  .btn-secondary:hover {
-    background-color: #e0e0e0;
-  }
+    /* Extras Modal */
+    .modal-content {
+      background: linear-gradient(135deg, #fff7e6 0%, #f7e9d0 100%);
+      border: 2px solid #d97706;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .modal-header {
+      background: #d97706;
+      color: #fff;
+    }
+    .modal-title {
+      font-family: 'Gagalin', cursive;
+      font-size: 1.6rem;
+    }
+    .modal-body h6 {
+      color: #d97706;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .form-check-label {
+      color: #333;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    .form-check-input:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+    .btn-primary {
+      background: #facc15;
+      border: none;
+      transition: transform 0.2s;
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+      background: #d97706;
+    }
 
-  h3.section-title {
-    margin: 20px 0 10px;
-    color: #ffffff;
-    font-size: 1.4rem;
-    font-weight: 700;
-  }
+    /* Payment Modal */
+    #cashInput .form-label {
+      font-weight: 500;
+      color: #333;
+    }
+    #changeAmount {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .change-positive {
+      color: #28a745;
+    }
+    .change-negative {
+      color: #dc3545;
+    }
 
-  /* Extras Panel */
-  .extras-panel {
-    display: none;
-    font-size: 0.8rem;
-    text-align: left;
-    background: #f5f5f5;
-    border: 1px dashed #d97706;
-    padding: 8px;
-    border-radius: 8px;
-  }
-  .extras-panel h6 {
-    font-size: 0.85rem;
-    margin: 5px 0;
-    color: #1a1a1a;
-  }
-  .extras-panel label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 4px;
-    color: #1a1a1a;
-  }
-  .toggle-extras {
-    font-size: 0.8rem;
-    border: 1px solid #d97706;
-    color: #d97706;
-    background: #f5f5f5;
-    padding: 5px 8px;
-  }
-  .toggle-extras:hover {
-    background: #e0e0e0;
-    color: #b45309;
-    border-color: #b45309;
-  }
-
-  /* Carrinho */
-  #carrinho {
-    background: #f5f5f5;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #1a1a1a;
-  }
-  .btn-remover {
-    font-size: 0.8rem;
-    color: #ffffff;
-    background: #dc3545;
-    border: none;
-    padding: 5px 8px;
-    min-height: 34px;
-  }
-  .table {
-    font-size: 0.85rem;
-    table-layout: fixed;
-  }
-  .table th, .table td {
-    padding: 6px;
-    vertical-align: middle;
-    color: #1a1a1a;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .table th:nth-child(1), .table td:nth-child(1) { width: 30%; }
-  .table th:nth-child(2), .table td:nth-child(2) { width: 15%; }
-  .table th:nth-child(3), .table td:nth-child(3) { width: 30%; }
-  .table th:nth-child(4), .table td:nth-child(4) { width: 15%; }
-  .table th:nth-child(5), .table td:nth-child(5) { width: 10%; text-align: center; white-space: nowrap; }
-
-  /* Pagamento */
-  .pay-badges .form-check {
-    background: #f5f5f5;
-    border-radius: 8px;
-    padding: 6px 8px;
-    border: 1px solid #d97706;
-    margin-bottom: 6px;
-  }
-  .pay-badges .form-check-label {
-    font-size: 0.85rem;
-    color: #1a1a1a;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .pay-badges .form-check-input:checked ~ .form-check-label {
-    font-weight: 600;
-  }
-
-  /* Footer */
-  footer {
-    background-color: #d97706;
-    color: #ffffff;
-    padding: 15px 0;
-    text-align: center;
-    font-size: 0.85rem;
-    font-weight: 400;
-  }
-  footer a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-  footer a:hover {
-    color: #f5f5f5;
-  }
-  .footer-contact {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 8px;
-    align-items: center;
-  }
-  .footer-contact i {
-    margin-right: 5px;
-    width: 16px;
-    text-align: center;
-  }
-  .ticker-container {
-    width: 100%;
-    overflow: hidden;
-    background: #2b2424;
-    padding: 8px 0;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  }
-  .ticker-text {
-    display: inline-block;
-    white-space: nowrap;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #ffffff;
-    animation: ticker 15s linear infinite;
-  }
-  .ticker-text:hover {
-    animation-play-state: paused;
-  }
-  @keyframes ticker {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-  }
-
-  /* Mobile Adjustments */
-  @media (max-width: 576px) {
-    body { font-size: 14px; }
-    .navbar { padding: 6px 0; }
-    .navbar-brand { font-size: 0.9rem; }
-    .navbar-brand img { height: 28px; }
-    .contact-group {
+    /* Footer */
+    .footer {
+      background: #1e1a1a;
+      color: #ddd;
+      padding: 20px;
+      text-align: center;
+    }
+    .footer .container {
+      display: flex;
       flex-direction: column;
-      gap: 6px;
-      margin-left: 0;
-      width: 100%;
-      padding: 0 10px;
+      align-items: center;
     }
-    .btn-contact {
-      font-size: 0.8rem;
-      padding: 5px 8px;
-      min-height: 40px;
-      width: 100%;
-      justify-content: center;
+    .footer a {
+      color: #facc15;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-top: 10px;
     }
-    .btn-contact i { font-size: 0.8rem; width: 14px; }
-    .hero { padding: 10px; }
-    .hero img { height: 70px; max-width: 140px; }
-    .hero h2 { font-size: 1.2rem; }
-    .hero p { font-size: 0.75rem; }
-    .card img { height: 140px; }
-    .card-title { font-size: 0.95rem; }
-    .text-success { font-size: 0.85rem; }
-    .btn-primary, .btn-secondary, .btn-remover {
-      font-size: 0.75rem;
-      padding: 5px 6px;
-      min-height: 36px;
+    .footer a:hover {
+      color: #d97706;
     }
-    .quantidade { width: 40px; font-size: 0.85rem; }
-    h3.section-title { font-size: 1.2rem; }
-    .extras-panel { font-size: 0.75rem; }
-    .extras-panel h6 { font-size: 0.8rem; }
-    .table { font-size: 0.75rem; }
-    .table th, .table td { padding: 5px; }
-    #carrinho { padding: 8px; }
-    .pay-badges .form-check-label { font-size: 0.8rem; }
-    footer { padding: 12px 0; font-size: 0.8rem; }
-    .footer-contact { gap: 10px; flex-direction: column; }
-    .ticker-text { font-size: 0.75rem; animation-duration: 18s; }
-    .table-responsive { overflow-x: auto; } /* Adicionado para permitir scroll horizontal em mobile */
-    .table th:nth-child(3), .table td:nth-child(3) { width: 30%; } /* Ajustado para mobile */
-    .table th:nth-child(5), .table td:nth-child(5) { width: 10%; } /* Aumentado para evitar corte */
-    .btn-remover { padding: 5px; } /* Reduzido padding para caber melhor */
-  }
-</style>
+
+    /* Category Headers */
+    .category-header {
+      font-family: 'Gagalin', cursive;
+      color: #facc15;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-
-<!-- Splash Screen -->
-<div id="splash">
-  <img src="img/logo.png" alt="Logo Baruch Burguer" loading="lazy" onerror="this.src='https://via.placeholder.com/120?text=Logo'">
-</div>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg sticky-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="img/logo.png" alt="Baruch Burguer" loading="lazy" onerror="this.src='https://via.placeholder.com/35?text=Logo'">
-      Baruch Burguer
-    </a>
-    <div class="contact-group">
-      <a href="tel:+351969307121" class="btn btn-contact" aria-label="Ligar para Baruch Burguer">
-        <i class="fas fa-phone"></i>
-        <span>+351 969 307 121</span>
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="img/logo.png" alt="Baruch Burguer Logo">
       </a>
-      <a href="https://wa.me/351969307121" target="_blank" class="btn btn-contact" aria-label="Enviar mensagem via WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-        <span>WhatsApp</span>
-      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#categorias">Cardápio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contato">Contato</a>
+          </li>
+        </ul>
+        <div class="nav-icons ms-3 d-flex align-items-center">
+          <a href="#" onclick="alert('Função de busca em desenvolvimento');" title="Procurar Itens" data-bs-toggle="tooltip"><i class="bi bi-search"></i></a>
+          <a href="tel:+351969307121" title="Telefone" data-bs-toggle="tooltip"><i class="bi bi-telephone"></i></a>
+          <a href="https://wa.me/+351969307121" target="_blank" title="WhatsApp" data-bs-toggle="tooltip"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" onclick="alert('Função de cadastro/login em desenvolvimento');" title="Cadastro/Login" data-bs-toggle="tooltip"><i class="bi bi-person-circle"></i></a>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- Hero -->
-<section class="container">
-  <div class="hero">
-    <img src="img/logo.png" alt="Baruch Burguer" loading="lazy" onerror="this.src='https://via.placeholder.com/180x100?text=Logo'">
-    <h2 class="mb-1">Bem-vindo ao Baruch Burguer</h2>
-    <p class="mb-0">Monte do seu jeito. Clique em <strong>➕ Personalizar</strong> para escolher <em>extras</em> e o que deseja <em>retirar</em>.</p>
-  </div>
-</section>
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Bem-vindo ao Baruch Burguer</h2>
+    <p>Monte seu pedido com os melhores ingredientes frescos.</p>
+  </section>
 
-<!-- Cardápio -->
-<section id="menu" class="container py-3">
+  <!-- Destaque Hambúrguer do Mês -->
+  <section id="burger-do-mes" class="container my-5">
+    <div class="highlight-card shadow-lg rounded-4 p-4 d-flex flex-column flex-md-row align-items-center">
+      <img src="img/burger2.jpg" alt="Hambúrguer do Mês" class="img-fluid rounded-4 me-md-4 mb-3 mb-md-0">
+      <div>
+        <h3 class="fw-bold text-warning">🍔 Hambúrguer do Mês</h3>
+        <p class="mb-1"><strong>Ingredientes:</strong> Pão artesanal, dois hambúrgueres suculentos, queijo cheddar derretido, bacon crocante, cebola caramelizada e molho especial.</p>
+        <p class="fst-italic text-muted">Uma explosão de sabor que vai conquistar o seu paladar!</p>
+        <button class="btn btn-primary mt-2" onclick="openExtrasModal({id: 'burger-mes', name: 'Hambúrguer do Mês', price: 12.00, category: 'hamburgueres'})">
+          Adicionar ao Carrinho
+        </button>
+      </div>
+    </div>
+  </section>
 
-  <!-- Hambúrgueres -->
-  <h3 class="section-title">🍔 Hambúrgueres</h3>
-  <div class="row g-3">
-    <!-- Burger 1 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/burger1.jpg" class="card-img-top" alt="Hambúrguer Clássico" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Burger'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Hambúrguer Clássico</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="7.5">€7,50</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-burger1')" aria-label="Personalizar Hambúrguer Clássico">➕ Personalizar</button>
-          <div id="extras-burger1" class="extras-panel text-muted">
-            <h6>Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Bacon" data-preco="1.00"> Bacon (+€1,00)</label>
-            <label><input type="checkbox" class="extra" data-name="Queijo" data-preco="0.50"> Queijo (+€0,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Salada"> Salada</label>
-            <label><input type="checkbox" class="retirar" data-name="Cebola"> Cebola</label>
+  <!-- Categorias -->
+  <section id="categorias" class="container my-5">
+    <h3 class="mb-4">Escolha uma categoria:</h3>
+
+    <!-- Hambúrgueres -->
+    <h4 class="category-header">🍔 Hambúrgueres</h4>
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/burger1.jpg" class="card-img-top" alt="Hambúrguer Tradicional">
+          <div class="card-body">
+            <h5 class="card-title">Hambúrguer Tradicional</h5>
+            <p class="card-text">€7,50</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'burger1', name: 'Hambúrguer Tradicional', price: 7.50, category: 'hamburgueres'})">Adicionar</button>
           </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('burger1', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-burger1" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('burger1', 1)" aria-label="Aumentar quantidade">+</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/burger2.jpg" class="card-img-top" alt="Cheddar Bacon">
+          <div class="card-body">
+            <h5 class="card-title">Cheddar Bacon</h5>
+            <p class="card-text">€9,00</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'burger2', name: 'Cheddar Bacon', price: 9.00, category: 'hamburgueres'})">Adicionar</button>
           </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Hambúrguer Clássico', 7.5, 'extras-burger1', 'qtd-burger1')" aria-label="Adicionar Hambúrguer Clássico ao carrinho">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/burger3.jpg" class="card-img-top" alt="Baruch Especial">
+          <div class="card-body">
+            <h5 class="card-title">Baruch Especial</h5>
+            <p class="card-text">€11,50</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'burger3', name: 'Baruch Especial', price: 11.50, category: 'hamburgueres'})">Adicionar</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Burger 2 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/burger2.jpg" class="card-img-top" alt="Hambúrguer Duplo" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Burger'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Hambúrguer Duplo</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="9.0">€9,00</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-burger2')" aria-label="Personalizar Hambúrguer Duplo">➕ Personalizar</button>
-          <div id="extras-burger2" class="extras-panel text-muted">
-            <h6>Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Bacon" data-preco="1.00"> Bacon (+€1,00)</label>
-            <label><input type="checkbox" class="extra" data-name="Queijo" data-preco="0.50"> Queijo (+€0,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Salada"> Salada</label>
-            <label><input type="checkbox" class="retirar" data-name="Cebola"> Cebola</label>
+    <!-- Pizzas -->
+    <h4 class="category-header">🍕 Pizzas</h4>
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/pizza1.jpg" class="card-img-top" alt="Pizza Margherita">
+          <div class="card-body">
+            <h5 class="card-title">Pizza Margherita</h5>
+            <p class="card-text">€8,00</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza1', name: 'Pizza Margherita', price: 8.00, category: 'pizzas'})">Adicionar</button>
           </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('burger2', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-burger2" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('burger2', 1)" aria-label="Aumentar quantidade">+</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/pizza2.jpg" class="card-img-top" alt="Pizza Pepperoni">
+          <div class="card-body">
+            <h5 class="card-title">Pizza Pepperoni</h5>
+            <p class="card-text">€9,50</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza2', name: 'Pizza Pepperoni', price: 9.50, category: 'pizzas'})">Adicionar</button>
           </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Hambúrguer Duplo', 9.0, 'extras-burger2', 'qtd-burger2')" aria-label="Adicionar Hambúrguer Duplo ao carrinho">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/pizza3.jpg" class="card-img-top" alt="Pizza Quatro Queijos">
+          <div class="card-body">
+            <h5 class="card-title">Pizza Quatro Queijos</h5>
+            <p class="card-text">€10,00</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza3', name: 'Pizza Quatro Queijos', price: 10.00, category: 'pizzas'})">Adicionar</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Burger 3 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/burger3.jpg" class="card-img-top" alt="Hambúrguer Veggie" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Burger'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Hambúrguer Veggie</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="8.0">€8,00</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-burger3')" aria-label="Personalizar Hambúrguer Veggie">➕ Personalizar</button>
-          <div id="extras-burger3" class="extras-panel text-muted">
-            <h6>Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Queijo" data-preco="0.50"> Queijo (+€0,50)</label>
-            <label><input type="checkbox" class="extra" data-name="Cogumelos" data-preco="0.50"> Cogumelos (+€0,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Tomate"> Tomate</label>
-            <label><input type="checkbox" class="retirar" data-name="Cebola"> Cebola</label>
+    <!-- Açaí -->
+    <h4 class="category-header">🍧 Açaí</h4>
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/acai1.png" class="card-img-top" alt="Açaí Copo 300ml">
+          <div class="card-body">
+            <h5 class="card-title">Açaí Copo 300ml</h5>
+            <p class="card-text">€4,00</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'acai1', name: 'Açaí Copo 300ml', price: 4.00, category: 'acai'})">Adicionar</button>
           </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('burger3', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-burger3" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('burger3', 1)" aria-label="Aumentar quantidade">+</button>
-          </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Hambúrguer Veggie', 8.0, 'extras-burger3', 'qtd-burger3')" aria-label="Adicionar Hambúrguer Veggie ao carrinho">Adicionar ao Carrinho</button>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Pizzas -->
-  <h3 class="section-title">🍕 Pizzas</h3>
-  <div class="row g-3">
-    <!-- Pizza 1 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/pizza3.jpg" class="card-img-top" alt="Pizza Calabresa" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Pizza'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Pizza Calabresa</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="9.0">€9,00</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-pizza1')" aria-label="Personalizar Pizza Calabresa">➕ Personalizar</button>
-          <div id="extras-pizza1" class="extras-panel text-muted">
-            <h6>Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Extra Queijo" data-preco="1.00"> Extra Queijo (+€1,00)</label>
-            <label><input type="checkbox" class="extra" data-name="Pepperoni" data-preco="1.50"> Pepperoni (+€1,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Tomate"> Tomate</label>
-            <label><input type="checkbox" class="retirar" data-name="Cebola"> Cebola</label>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/acai2.png" class="card-img-top" alt="Açaí Copo 500ml">
+          <div class="card-body">
+            <h5 class="card-title">Açaí Copo 500ml</h5>
+            <p class="card-text">€5,50</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'acai2', name: 'Açaí Copo 500ml', price: 5.50, category: 'acai'})">Adicionar</button>
           </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('pizza1', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-pizza1" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('pizza1', 1)" aria-label="Aumentar quantidade">+</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/acai3.png" class="card-img-top" alt="Açaí Copo 700ml">
+          <div class="card-body">
+            <h5 class="card-title">Açaí Copo 700ml</h5>
+            <p class="card-text">€7,00</p>
+            <button class="btn btn-primary" onclick="openExtrasModal({id: 'acai3', name: 'Açaí Copo 700ml', price: 7.00, category: 'acai'})">Adicionar</button>
           </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Pizza Calabresa', 9.0, 'extras-pizza1', 'qtd-pizza1')" aria-label="Adicionar Pizza Calabresa ao carrinho">Adicionar ao Carrinho</button>
         </div>
       </div>
     </div>
 
-    <!-- Pizza 2 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/pizza2.jpg" class="card-img-top" alt="Pizza Mussarela" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Pizza'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Pizza Mussarela</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="8.5">€8,50</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-pizza2')" aria-label="Personalizar Pizza Mussarela">➕ Personalizar</button>
-          <div id="extras-pizza2" class="extras-panel text-muted">
-            <h6>Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Extra Queijo" data-preco="1.00"> Extra Queijo (+€1,00)</label>
-            <label><input type="checkbox" class="extra" data-name="Tomate Seco" data-preco="1.50"> Tomate Seco (+€1,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Tomate"> Tomate</label>
-            <label><input type="checkbox" class="retirar" data-name="Cebola"> Cebola</label>
+    <!-- Bebidas -->
+    <h4 class="category-header">🥤 Bebidas</h4>
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/cocacola.jpg" class="card-img-top" alt="Coca-Cola 600ml">
+          <div class="card-body">
+            <h5 class="card-title">Coca-Cola 600ml</h5>
+            <p class="card-text">€3,50</p>
+            <button class="btn btn-primary" onclick="addToCart({id: 'drink1', name: 'Coca-Cola 600ml', price: 3.50, category: 'bebidas'})">Adicionar</button>
           </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('pizza2', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-pizza2" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('pizza2', 1)" aria-label="Aumentar quantidade">+</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/fanta.jpg" class="card-img-top" alt="Fanta 600ml">
+          <div class="card-body">
+            <h5 class="card-title">Fanta 600ml</h5>
+            <p class="card-text">€3,50</p>
+            <button class="btn btn-primary" onclick="addToCart({id: 'drink2', name: 'Fanta 600ml', price: 3.50, category: 'bebidas'})">Adicionar</button>
           </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Pizza Mussarela', 8.5, 'extras-pizza2', 'qtd-pizza2')" aria-label="Adicionar Pizza Mussarela ao carrinho">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/pepsi.jpg" class="card-img-top" alt="Pepsi Lata">
+          <div class="card-body">
+            <h5 class="card-title">Pepsi Lata</h5>
+            <p class="card-text">€2,50</p>
+            <button class="btn btn-primary" onclick="addToCart({id: 'drink3', name: 'Pepsi Lata', price: 2.50, category: 'bebidas'})">Adicionar</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Pizza 3 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/pizza1.jpg" class="card-img-top" alt="Pizza Portuguesa" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Pizza'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Pizza Portuguesa</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="10.0">€10,00</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-pizza3')" aria-label="Personalizar Pizza Portuguesa">➕ Personalizar</button>
-          <div id="extras-pizza3" class="extras-panel text-muted">
-            <h6>Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Extra Queijo" data-preco="1.00"> Extra Queijo (+€1,00)</label>
-            <label><input type="checkbox" class="extra" data-name="Presunto" data-preco="1.50"> Presunto (+€1,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Tomate"> Tomate</label>
-            <label><input type="checkbox" class="retirar" data-name="Cebola"> Cebola</label>
+    <!-- Sobremesas -->
+    <h4 class="category-header">🍰 Sobremesas</h4>
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/milkshake.jpg" class="card-img-top" alt="Milkshake de Chocolate">
+          <div class="card-body">
+            <h5 class="card-title">Milkshake de Chocolate</h5>
+            <p class="card-text">€5,00</p>
+            <button class="btn btn-primary" onclick="addToCart({id: 'dessert1', name: 'Milkshake de Chocolate', price: 5.00, category: 'sobremesas'})">Adicionar</button>
           </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('pizza3', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-pizza3" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('pizza3', 1)" aria-label="Aumentar quantidade">+</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/brownie.jpg" class="card-img-top" alt="Brownie com Sorvete">
+          <div class="card-body">
+            <h5 class="card-title">Brownie com Sorvete</h5>
+            <p class="card-text">€4,50</p>
+            <button class="btn btn-primary" onclick="addToCart({id: 'dessert2', name: 'Brownie com Sorvete', price: 4.50, category: 'sobremesas'})">Adicionar</button>
           </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Pizza Portuguesa', 10.0, 'extras-pizza3', 'qtd-pizza3')" aria-label="Adicionar Pizza Portuguesa ao carrinho">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/cheesecake.jpg" class="card-img-top" alt="Cheesecake de Frutas">
+          <div class="card-body">
+            <h5 class="card-title">Cheesecake de Frutas</h5>
+            <p class="card-text">€6,00</p>
+            <button class="btn btn-primary" onclick="addToCart({id: 'dessert3', name: 'Cheesecake de Frutas', price: 6.00, category: 'sobremesas'})">Adicionar</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Cachorros-quentes -->
-  <h3 class="section-title">🌭 Cachorros-Quentes</h3>
-  <div class="row g-3">
-    <!-- Hotdog 1 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/hotdog1.jpg" class="card-img-top" alt="Hotdog 1" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Hotdog'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Salsicha, Molho e Batata Palha</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="5.5">€5,50</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-hotdog1')" aria-label="Personalizar Hotdog 1">➕ Personalizar</button>
-          <div id="extras-hotdog1" class="extras-panel text-muted">
-            <h6>Molhos (janela oculta)</h6>
-            <label><input type="checkbox" class="extra" data-name="Ketchup" data-preco="0"> Ketchup</label>
-            <label><input type="checkbox" class="extra" data-name="Maionese" data-preco="0"> Maionese</label>
-            <label><input type="checkbox" class="extra" data-name="Mostarda" data-preco="0"> Mostarda</label>
-            <label><input type="checkbox" class="extra" data-name="Barbecue" data-preco="0"> Barbecue</label>
-            <h6 class="mt-2">Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Queijo" data-preco="0.50"> Queijo (+€0,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Molho"> Molho</label>
-            <label><input type="checkbox" class="retirar" data-name="Batata Palha"> Batata Palha</label>
-          </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('hotdog1', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-hotdog1" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('hotdog1', 1)" aria-label="Aumentar quantidade">+</button>
-          </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Hotdog: Salsicha, Molho e Batata Palha', 5.5, 'extras-hotdog1', 'qtd-hotdog1')" aria-label="Adicionar Hotdog 1 ao carrinho">Adicionar ao Carrinho</button>
+  <!-- Cart Button -->
+  <button class="btn btn-warning cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal">
+    🛒 Carrinho (<span id="cartCount">0</span>)
+  </button>
+
+  <!-- Extras Modal -->
+  <div class="modal fade" id="extrasModal" tabindex="-1" aria-labelledby="extrasModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="extrasModalLabel">Personalizar Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
-    </div>
-
-    <!-- Hotdog 2 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/hotdog2.jpg" class="card-img-top" alt="Hotdog 2" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Hotdog'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Salsicha, Molho, Ervilha, Milho e Batata Palha</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="6.5">€6,50</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-hotdog2')" aria-label="Personalizar Hotdog 2">➕ Personalizar</button>
-          <div id="extras-hotdog2" class="extras-panel text-muted">
-            <h6>Molhos (janela oculta)</h6>
-            <label><input type="checkbox" class="extra" data-name="Ketchup" data-preco="0"> Ketchup</label>
-            <label><input type="checkbox" class="extra" data-name="Maionese" data-preco="0"> Maionese</label>
-            <label><input type="checkbox" class="extra" data-name="Mostarda" data-preco="0"> Mostarda</label>
-            <label><input type="checkbox" class="extra" data-name="Barbecue" data-preco="0"> Barbecue</label>
-            <h6 class="mt-2">Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Queijo" data-preco="0.50"> Queijo (+€0,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Molho"> Molho</label>
-            <label><input type="checkbox" class="retirar" data-name="Ervilha"> Ervilha</label>
-            <label><input type="checkbox" class="retirar" data-name="Milho"> Milho</label>
-            <label><input type="checkbox" class="retirar" data-name="Batata Palha"> Batata Palha</label>
-          </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('hotdog2', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-hotdog2" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('hotdog2', 1)" aria-label="Aumentar quantidade">+</button>
-          </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Hotdog: Salsicha, Molho, Ervilha, Milho e Batata Palha', 6.5, 'extras-hotdog2', 'qtd-hotdog2')" aria-label="Adicionar Hotdog 2 ao carrinho">Adicionar ao Carrinho</button>
+        <div class="modal-body">
+          <h6>Extras</h6>
+          <div id="extrasOptions"></div>
+          <h6 class="mt-3">Retiradas</h6>
+          <div id="removeOptions"></div>
         </div>
-      </div>
-    </div>
-
-    <!-- Hotdog 3 -->
-    <div class="col-12 col-md-4">
-      <div class="card h-100">
-        <img src="img/hotdog3.jpg" class="card-img-top" alt="Hotdog 3" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180?text=Hotdog'">
-        <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title">Linguiça, Molho, Ervilha, Milho, Azeitona, Ovo de Codorna, Parmesão e Batata Palha</h5>
-          <p class="text-success fw-bold mb-2" data-preco-base="8.5">€8,50</p>
-          <button class="btn btn-sm toggle-extras mb-2" onclick="toggleExtras('extras-hotdog3')" aria-label="Personalizar Hotdog 3">➕ Personalizar</button>
-          <div id="extras-hotdog3" class="extras-panel text-muted">
-            <h6>Molhos (janela oculta)</h6>
-            <label><input type="checkbox" class="extra" data-name="Ketchup" data-preco="0"> Ketchup</label>
-            <label><input type="checkbox" class="extra" data-name="Maionese" data-preco="0"> Maionese</label>
-            <label><input type="checkbox" class="extra" data-name="Mostarda" data-preco="0"> Mostarda</label>
-            <label><input type="checkbox" class="extra" data-name="Barbecue" data-preco="0"> Barbecue</label>
-            <h6 class="mt-2">Adicionar (custo por unidade)</h6>
-            <label><input type="checkbox" class="extra" data-name="Bacon" data-preco="0.50"> Bacon (+€0,50)</label>
-            <h6 class="mt-2">Retirar</h6>
-            <label><input type="checkbox" class="retirar" data-name="Molho"> Molho</label>
-            <label><input type="checkbox" class="retirar" data-name="Ervilha"> Ervilha</label>
-            <label><input type="checkbox" class="retirar" data-name="Milho"> Milho</label>
-            <label><input type="checkbox" class="retirar" data-name="Azeitona"> Azeitona</label>
-            <label><input type="checkbox" class="retirar" data-name="Ovo de Codorna"> Ovo de Codorna</label>
-            <label><input type="checkbox" class="retirar" data-name="Queijo Parmesão"> Queijo Parmesão</label>
-            <label><input type="checkbox" class="retirar" data-name="Batata Palha"> Batata Palha</label>
-          </div>
-          <div class="my-2">
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('hotdog3', -1)" aria-label="Diminuir quantidade">−</button>
-            <input type="text" id="qtd-hotdog3" class="quantidade" value="1" readonly>
-            <button class="btn btn-sm btn-secondary" onclick="alterarQuantidade('hotdog3', 1)" aria-label="Aumentar quantidade">+</button>
-          </div>
-          <button class="btn btn-primary w-100 mt-auto" onclick="adicionarCarrinho('Hotdog: Linguiça completo', 8.5, 'extras-hotdog3', 'qtd-hotdog3')" aria-label="Adicionar Hotdog 3 ao carrinho">Adicionar ao Carrinho</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Carrinho -->
-<section id="carrinho" class="container mt-4 mb-5">
-  <h3>Carrinho</h3>
-  <div class="table-responsive"> <!-- Adicionado wrapper para responsividade -->
-    <table class="table table-striped table-bordered align-middle">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Qtd</th>
-          <th>Extras / Remover</th>
-          <th>Preço</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody id="corpoCarrinho"></tbody>
-    </table>
-  </div>
-  <p id="total" class="fw-bold">Total: €0,00</p>
-
-  <!-- Dados do cliente -->
-  <div class="row g-3 mt-3">
-    <div class="col-12 col-md-4">
-      <label for="nomeCliente" class="form-label">Nome*</label>
-      <input type="text" id="nomeCliente" class="form-control" required>
-    </div>
-    <div class="col-12 col-md-4">
-      <label for="telefoneCliente" class="form-label">Telefone*</label>
-      <input type="tel" id="telefoneCliente" class="form-control" placeholder="+351 ..." required>
-    </div>
-    <div class="col-12 col-md-4">
-      <label for="enderecoCliente" class="form-label">Endereço*</label>
-      <input type="text" id="enderecoCliente" class="form-control" required>
-    </div>
-    <div class="col-12 col-md-4">
-      <label for="referenciaCliente" class="form-label">Ponto de Referência</label>
-      <input type="text" id="referenciaCliente" class="form-control" placeholder="Ex: Próximo à padaria">
-    </div>
-  </div>
-
-  <!-- Pagamento -->
-  <div class="mt-3">
-    <label class="form-label d-block mb-2">Forma de pagamento:</label>
-    <div class="row g-2 pay-badges">
-      <div class="col-12 col-md-4">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pagamento" id="pg-debito" value="debito" checked onclick="verificaTroco()">
-          <label class="form-check-label" for="pg-debito"><i class="fas fa-credit-card"></i> Cartão de Débito</label>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pagamento" id="pg-credito" value="credito" onclick="verificaTroco()">
-          <label class="form-check-label" for="pg-credito"><i class="fas fa-credit-card"></i> Cartão de Crédito</label>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pagamento" id="pg-dinheiro" value="dinheiro" onclick="verificaTroco()">
-          <label class="form-check-label" for="pg-dinheiro"><i class="fas fa-money-bill"></i> Dinheiro</label>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="confirmExtras()">Adicionar ao Carrinho</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="trocoDiv" class="mb-3 mt-2" style="display:none;">
-    <label for="troco" class="form-label">Valor que vai pagar:</label>
-    <input type="number" id="troco" class="form-control" placeholder="Ex: 20" step="0.01" min="0">
-    <p id="trocoCalculado" class="fw-bold mt-1"></p>
+  <!-- Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cartModalLabel">Carrinho de Compras</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItems"></div>
+          <h5 class="mt-3">Total: €<span id="cartTotal">0.00</span></h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" onclick="proceedToPayment()">Finalizar Pedido</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <button class="btn btn-success w-100" onclick="finalizarPedido()" aria-label="Finalizar Pedido">Finalizar Pedido</button>
-  <p id="mensagem" class="mt-3"></p>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="ticker-container">
-      <span class="ticker-text">A partir da recepção do seu pedido, o mesmo pode demorar de 30 a 40 minutos para ficar pronto.</span>
+  <!-- Payment Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentModalLabel">Forma de Pagamento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentMethod" id="payment1" value="Pix" checked>
+            <label class="form-check-label" for="payment1">Pix</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentMethod" id="payment2" value="Cartão de Crédito">
+            <label class="form-check-label" for="payment2">Cartão de Crédito</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentMethod" id="payment3" value="Cartão de Débito">
+            <label class="form-check-label" for="payment3">Cartão de Débito</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="paymentMethod" id="payment4" value="Dinheiro">
+            <label class="form-check-label" for="payment4">Dinheiro</label>
+          </div>
+          <div id="cashInput" class="mt-3" style="display: none;">
+            <label for="cashAmount" class="form-label">Valor pago em dinheiro (€):</label>
+            <input type="number" class="form-control" id="cashAmount" step="0.01" min="0" placeholder="Ex: 20.00">
+            <p class="mt-2">Troco: €<span id="changeAmount" class="change-positive">0.00</span></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="confirmOrder()">Confirmar Pedido</button>
+        </div>
+      </div>
     </div>
-    <div class="footer-contact">
-      <span><i class="fas fa-map-marker-alt"></i> Rua Exemplo, 123, Lisboa, Portugal</span>
-      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Exemplo%2C+123%2C+Lisboa%2C+Portugal" target="_blank" aria-label="Ver no Mapa">
-        <i class="fas fa-map"></i> Ver no Mapa
-      </a>
-    </div>
-    <p>&copy; 2025 Baruch Burguer. Todos os direitos reservados.</p>
   </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // ---------- Config ----------
-  const config = {
-    whatsappNumber: '351969307121'
-  };
+  <!-- Footer -->
+  <footer class="footer" id="contato">
+    <div class="container">
+      <p>📍 Rua Fictícia, 123, Centro - Cidade, Estado</p>
+      <p>📞 +351 969 307 121 | 📧 contato@baruchburguer.com</p>
+      <a href="https://www.google.com/maps?q=38.7223,-9.1393" target="_blank">Abrir no Google Maps</a>
+      <p>&copy; 2025 Baruch Burguer. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 
-  // ---------- Estado ----------
-  let carrinho = [];
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let cart = [];
+    let currentItem = null;
+    const whatsappNumber = "+351969307121";
 
-  // ---------- Splash ----------
-  window.addEventListener('load', () => {
-    setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 1000);
-  });
-
-  // ---------- Util ----------
-  const fmt = new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' });
-  const euro = (n) => fmt.format(n).replace('€', '€');
-
-  function toggleExtras(id) {
-    const el = document.getElementById(id);
-    el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
-  }
-
-  function alterarQuantidade(id, delta) {
-    const input = document.getElementById('qtd-' + id);
-    let v = parseInt(input.value || '1', 10) + delta;
-    if (v < 1) v = 1;
-    input.value = v;
-  }
-
-  function getSelectedExtras(panelId) {
-    const panel = document.getElementById(panelId);
-    const extras = Array.from(panel.querySelectorAll('input.extra:checked')).map(cb => ({
-      name: cb.dataset.name,
-      price: parseFloat(cb.dataset.preco || '0')
-    }));
-    extras.sort((a, b) => a.name.localeCompare(b.name));
-    return extras;
-  }
-
-  function getSelectedRemover(panelId) {
-    const panel = document.getElementById(panelId);
-    const retirar = Array.from(panel.querySelectorAll('input.retirar:checked')).map(cb => cb.dataset.name);
-    retirar.sort((a, b) => a.localeCompare(b));
-    return retirar;
-  }
-
-  function keyFromSelections(extras, retirar) {
-    const ex = extras.map(e => e.name).join('|');
-    const rm = retirar.join('|');
-    return ex + '::' + rm;
-  }
-
-  // ---------- Carrinho ----------
-  function adicionarCarrinho(nome, precoBase, extrasPanelId, qtdInputId) {
-    const qtd = parseInt(document.getElementById(qtdInputId).value || '1', 10);
-    const extras = getSelectedExtras(extrasPanelId);
-    const retirar = getSelectedRemover(extrasPanelId);
-
-    const extrasUnitCost = extras.reduce((sum, e) => sum + (e.price || 0), 0);
-    const precoUnitFinal = precoBase + extrasUnitCost;
-    const precoTotal = precoUnitFinal * qtd;
-
-    const key = nome + '##' + keyFromSelections(extras, retirar);
-    const found = carrinho.find(i => i.key === key);
-
-    if (found) {
-      found.qtd += qtd;
-      found.precoTotal = found.qtd * (found.precoBase + found.extrasUnitCost);
-    } else {
-      carrinho.push({
-        key,
-        nome,
-        qtd,
-        precoBase,
-        extras,
-        extrasUnitCost,
-        retirar,
-        get precoUnit() { return this.precoBase + this.extrasUnitCost; },
-        get precoTotal() { return this.qtd * (this.precoBase + this.extrasUnitCost); },
-        set precoTotal(val) {}
-      });
-    }
-    atualizarCarrinho();
-  }
-
-  function atualizarCarrinho() {
-    const corpo = document.getElementById('corpoCarrinho');
-    corpo.innerHTML = '';
-    let total = 0;
-
-    carrinho.forEach((item, idx) => {
-      total += item.precoTotal;
-
-      const extrasTxt = item.extras.length
-        ? item.extras.map(e => e.price > 0 ? `${e.name} (+${euro(e.price)})` : e.name).join(', ')
-        : 'Nenhum';
-
-      const retirarTxt = item.retirar.length ? item.retirar.join(', ') : 'Nenhum';
-
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${item.nome}</td>
-        <td>${item.qtd}</td>
-        <td>
-          <div><strong>➕ Extras:</strong> ${extrasTxt}</div>
-          <div><strong>➖ Remover:</strong> ${retirarTxt}</div>
-        </td>
-        <td>${euro(item.precoTotal)}</td>
-        <td><button class="btn btn-sm btn-remover" onclick="removerItem(${idx})" aria-label="Remover ${item.nome} do carrinho"><i class="fas fa-trash"></i></button></td>
-      `;
-      corpo.appendChild(tr);
+    // Initialize Bootstrap tooltips
+    document.addEventListener('DOMContentLoaded', () => {
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
     });
 
-    document.getElementById('total').innerText = 'Total: ' + euro(total);
-    calculaTroco();
-  }
-
-  function removerItem(index) {
-    carrinho.splice(index, 1);
-    atualizarCarrinho();
-  }
-
-  // ---------- Pagamento / Troco ----------
-  function getFormaPagamento() {
-    const el = document.querySelector('input[name="pagamento"]:checked');
-    return el ? el.value : 'debito';
-  }
-
-  function verificaTroco() {
-    const forma = getFormaPagamento();
-    const div = document.getElementById('trocoDiv');
-    if (forma === 'dinheiro') {
-      div.style.display = 'block';
-    } else {
-      div.style.display = 'none';
-      document.getElementById('troco').value = '';
-      document.getElementById('trocoCalculado').innerText = '';
-    }
-    calculaTroco();
-  }
-
-  function calculaTroco() {
-    const forma = getFormaPagamento();
-    if (forma !== 'dinheiro') { return; }
-
-    const valorPago = parseFloat(document.getElementById('troco').value || '0');
-    const total = parseFloat(document.getElementById('total').innerText.replace(/[^\d,.-]/g, '').replace('.', '').replace(',', '.')) || 0;
-
-    if (valorPago >= total) {
-      const t = valorPago - total;
-      document.getElementById('trocoCalculado').innerText = 'Troco: ' + euro(t);
-    } else if (valorPago > 0) {
-      document.getElementById('trocoCalculado').innerText = 'Valor insuficiente!';
-    } else {
-      document.getElementById('trocoCalculado').innerText = '';
-    }
-  }
-
-  // ---------- Finalizar / WhatsApp ----------
-  function finalizarPedido() {
-    const nome = document.getElementById('nomeCliente').value.trim();
-    const tel = document.getElementById('telefoneCliente').value.trim();
-    const end = document.getElementById('enderecoCliente').value.trim();
-    const ref = document.getElementById('referenciaCliente').value.trim();
-
-    if (!nome || !tel || !end) {
-      alert('Preencha todos os campos obrigatórios (Nome, Telefone e Endereço)! O Ponto de Referência é opcional.');
-      return;
-    }
-    if (carrinho.length === 0) {
-      alert('Adicione itens ao carrinho!');
-      return;
+    function addToCart(item) {
+      cart.push({ ...item, extras: [], removals: [] });
+      updateCart();
     }
 
-    const total = carrinho.reduce((acc, i) => acc + i.precoTotal, 0);
-    const forma = getFormaPagamento();
-    const formaTxt = forma === 'debito' ? 'Cartão de Débito' : forma === 'credito' ? 'Cartão de Crédito' : 'Dinheiro';
+    function openExtrasModal(item) {
+      currentItem = item;
+      const extrasOptions = document.getElementById('extrasOptions');
+      const removeOptions = document.getElementById('removeOptions');
+      extrasOptions.innerHTML = '';
+      removeOptions.innerHTML = '';
 
-    let trocoValor = 0;
-    let valorPago = 0;
-    if (forma === 'dinheiro') {
-      valorPago = parseFloat(document.getElementById('troco').value || '0');
-      if (valorPago < total) {
-        alert('Valor pago insuficiente para o total.');
+      // Define extras and removals based on category
+      const extrasData = {
+        hamburgueres: [
+          { name: 'Bacon Extra', price: 0.50, id: 'extra1' },
+          { name: 'Molho Especial', price: 0.30, id: 'extra2' }
+        ],
+        pizzas: [
+          { name: 'Bacon Extra', price: 0.50, id: 'extra1' },
+          { name: 'Molho Especial', price: 0.30, id: 'extra2' }
+        ],
+        acai: [
+          { name: 'Granola', price: 0.40, id: 'extra1' },
+          { name: 'Leite Condensado', price: 0.30, id: 'extra2' }
+        ]
+      };
+
+      const removalsData = {
+        hamburgueres: [
+          { name: 'Sem Cebola', id: 'remove1' },
+          { name: 'Sem Alface', id: 'remove2' }
+        ],
+        pizzas: [
+          { name: 'Sem Cebola', id: 'remove1' },
+          { name: 'Sem Alface', id: 'remove2' }
+        ],
+        acai: [
+          { name: 'Sem Granola', id: 'remove1' },
+          { name: 'Sem Frutas', id: 'remove2' }
+        ]
+      };
+
+      const currentExtras = extrasData[item.category] || [];
+      const currentRemovals = removalsData[item.category] || [];
+
+      currentExtras.forEach(extra => {
+        const div = document.createElement('div');
+        div.className = 'form-check';
+        div.innerHTML = `
+          <input class="form-check-input" type="checkbox" value="${extra.price}" id="${extra.id}" data-name="${extra.name}">
+          <label class="form-check-label" for="${extra.id}">${extra.name} (€${extra.price.toFixed(2)})</label>
+        `;
+        extrasOptions.appendChild(div);
+      });
+
+      currentRemovals.forEach(removal => {
+        const div = document.createElement('div');
+        div.className = 'form-check';
+        div.innerHTML = `
+          <input class="form-check-input" type="checkbox" id="${removal.id}" data-name="${removal.name}">
+          <label class="form-check-label" for="${removal.id}">${removal.name}</label>
+        `;
+        removeOptions.appendChild(div);
+      });
+
+      const modal = new bootstrap.Modal(document.getElementById('extrasModal'));
+      modal.show();
+    }
+
+    function confirmExtras() {
+      const extras = [];
+      const removals = [];
+      document.querySelectorAll('#extrasOptions .form-check-input:checked').forEach(input => {
+        extras.push({ name: input.dataset.name, price: parseFloat(input.value) });
+      });
+      document.querySelectorAll('#removeOptions .form-check-input:checked').forEach(input => {
+        removals.push(input.dataset.name);
+      });
+      cart.push({ ...currentItem, extras, removals });
+      updateCart();
+      bootstrap.Modal.getInstance(document.getElementById('extrasModal')).hide();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cartItems');
+      const cartCount = document.getElementById('cartCount');
+      const cartTotal = document.getElementById('cartTotal');
+      cartItems.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0);
+        total += itemTotal;
+        const div = document.createElement('div');
+        div.className = 'cart-item d-flex justify-content-between align-items-center';
+        div.innerHTML = `
+          <div>
+            <strong>${item.name}</strong>
+            ${item.extras.length > 0 ? '<br><span>Extras: ' + item.extras.map(e => e.name).join(', ') + '</span>' : ''}
+            ${item.removals.length > 0 ? '<br><span>Retirar: ' + item.removals.join(', ') + '</span>' : ''}
+          </div>
+          <div>
+            <span class="item-price">€${itemTotal.toFixed(2)}</span>
+            <button class="btn btn-danger btn-sm ms-2" onclick="removeFromCart(${index})" title="Remover item" data-bs-toggle="tooltip"><i class="bi bi-trash"></i></button>
+          </div>
+        `;
+        cartItems.appendChild(div);
+      });
+
+      cartCount.textContent = cart.length;
+      cartTotal.textContent = total.toFixed(2);
+      // Reinitialize tooltips for newly added items
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+      updateChange();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function proceedToPayment() {
+      if (cart.length === 0) {
+        alert('Seu carrinho está vazio!');
         return;
       }
-      trocoValor = valorPago - total;
+      bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+      const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+      modal.show();
     }
 
-    // Mensagem formatada no padrão desejado
-    let linhas = [];
-    linhas.push('🍔 *Baruch Burger - Novo Pedido* 🍔');
-    linhas.push(`*Cliente:* ${nome}`);
-    linhas.push(`*Telefone:* ${tel}`);
-    linhas.push(`*Endereço de Entrega:* ${end}`);
-    if (ref) {
-      linhas.push(`*Ponto de Referência:* ${ref}`);
-    }
-    linhas.push('');
+    function updateChange() {
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const cashInput = document.getElementById('cashInput');
+      const cashAmount = document.getElementById('cashAmount');
+      const changeAmount = document.getElementById('changeAmount');
+      const total = cart.reduce((sum, item) => sum + item.price + item.extras.reduce((s, e) => s + e.price, 0), 0);
 
-    carrinho.forEach(i => {
-      linhas.push('----------------------------------');
-      linhas.push(`🍔 *${i.nome}*`);
-      let ingredientes = [];
-      if (i.extras.length) {
-        ingredientes = i.extras.map(e => e.price > 0 ? `${e.name} (€ +${euro(e.price)})` : e.name);
+      if (paymentMethod === 'Dinheiro') {
+        cashInput.style.display = 'block';
+        const paid = parseFloat(cashAmount.value) || 0;
+        const change = paid - total;
+        changeAmount.textContent = change.toFixed(2);
+        changeAmount.className = change >= 0 ? 'change-positive' : 'change-negative';
+      } else {
+        cashInput.style.display = 'none';
+        changeAmount.textContent = '0.00';
+        changeAmount.className = 'change-positive';
       }
-      const ingredientesTxt = ingredientes.length ? ingredientes.join(', ') : '-';
-      linhas.push(`   Ingredientes: ${ingredientesTxt}`);
-      const retirarTxt = i.retirar.length ? i.retirar.join(', ') : '-';
-      linhas.push(`   Retirar: ${retirarTxt}`);
-      linhas.push(`   Quantidade: ${i.qtd}`);
-      linhas.push(`   Preço: ${euro(i.precoTotal)}`);
-    });
-
-    linhas.push('----------------------------------');
-    linhas.push(`💰 *Total do Pedido:* ${euro(total)}`);
-    linhas.push(`💳 *Forma de Pagamento:* ${formaTxt}`);
-    if (forma === 'dinheiro') {
-      linhas.push(`💵 *Valor Pago:* ${euro(valorPago)}`);
-      linhas.push(`🔄 *Troco:* ${euro(trocoValor)}`);
     }
-    linhas.push('');
-    linhas.push(`🙏 Obrigado por escolher a *Baruch Burger*!`);
 
-    const texto = linhas.join('\n');
-    const url = `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
+    document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
+      input.addEventListener('change', updateChange);
+    });
+    document.getElementById('cashAmount')?.addEventListener('input', updateChange);
 
-    // Limpa estado
-    carrinho = [];
-    atualizarCarrinho();
-    document.getElementById('nomeCliente').value = '';
-    document.getElementById('telefoneCliente').value = '';
-    document.getElementById('enderecoCliente').value = '';
-    document.getElementById('referenciaCliente').value = '';
-    document.getElementById('troco').value = '';
-    document.getElementById('trocoCalculado').innerText = '';
-    verificaTroco();
-  }
+    function confirmOrder() {
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const total = cart.reduce((sum, item) => sum + item.price + item.extras.reduce((s, e) => s + e.price, 0), 0);
 
-  // Atualiza troco em tempo real
-  document.getElementById('troco').addEventListener('input', calculaTroco);
-</script>
+      if (paymentMethod === 'Dinheiro') {
+        const cashAmount = parseFloat(document.getElementById('cashAmount').value) || 0;
+        if (cashAmount < total) {
+          alert('O valor pago é insuficiente! Por favor, insira um valor maior ou igual ao total.');
+          return;
+        }
+      }
+
+      const orderNumber = Math.floor(10000 + Math.random() * 90000);
+      let orderMessage = `*🍔 Pedido Baruch Burguer #${orderNumber}*\n\n`;
+
+      const categories = {
+        hamburgueres: { name: 'Hambúrgueres', emoji: '🍔' },
+        pizzas: { name: 'Pizzas', emoji: '🍕' },
+        acai: { name: 'Açaí', emoji: '🍧' },
+        bebidas: { name: 'Bebidas', emoji: '🥤' },
+        sobremesas: { name: 'Sobremesas', emoji: '🍰' }
+      };
+
+      Object.keys(categories).forEach(category => {
+        const items = cart.filter(item => item.category === category);
+        if (items.length > 0) {
+          orderMessage += `${categories[category].emoji} *${categories[category].name}*\n`;
+          items.forEach((item, index) => {
+            const itemTotal = item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0);
+            orderMessage += `📋 Item ${index + 1}: ${item.name} (€${itemTotal.toFixed(2)})\n`;
+            if (item.extras.length > 0) {
+              orderMessage += `  Extras: ${item.extras.map(e => e.name).join(', ')}\n`;
+            }
+            if (item.removals.length > 0) {
+              orderMessage += `  Retirar: ${item.removals.join(', ')}\n`;
+            }
+            orderMessage += `------------------------\n`;
+          });
+        }
+      });
+
+      orderMessage += `\n*Total*: €${total.toFixed(2)}\n`;
+      orderMessage += `*Pagamento*: ${paymentMethod}\n`;
+      if (paymentMethod === 'Dinheiro') {
+        const cashAmount = parseFloat(document.getElementById('cashAmount').value) || 0;
+        const change = cashAmount - total;
+        if (cashAmount > 0) {
+          orderMessage += `*Valor Pago*: €${cashAmount.toFixed(2)}\n`;
+          orderMessage += `*Troco*: €${change >= 0 ? change.toFixed(2) : '0.00'}\n`;
+        }
+      }
+      orderMessage += `\n*Enviado em*: ${new Date().toLocaleString('pt-BR')}`;
+
+      const encodedMessage = encodeURIComponent(orderMessage);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      window.open(whatsappUrl, '_blank');
+
+      alert(`Pedido #${orderNumber} enviado para o WhatsApp!`);
+      cart = [];
+      updateCart();
+      bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+    }
+  </script>
 </body>
 </html>
