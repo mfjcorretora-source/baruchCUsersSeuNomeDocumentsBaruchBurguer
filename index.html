@@ -20,7 +20,7 @@
     /* Header */
     .navbar {
       background: #1e1a1a;
-      padding: 15px 0;
+      padding: 10px 0;
     }
     .navbar-brand {
       display: flex;
@@ -28,8 +28,7 @@
       padding: 0 15px;
     }
     .navbar-brand img {
-      height: 100px;
-      max-width: 100%;
+      height: 70px;
       transition: transform 0.3s;
     }
     .navbar-brand img:hover {
@@ -132,22 +131,29 @@
     }
 
     /* Cart Items */
-    #cartItems .cart-item {
-      background: rgba(255, 247, 230, 0.9);
-      border: 1px solid #d97706;
+    #cartItems div {
+      background: #fff7e6;
+      border: 1px solid #b35900;
       padding: 10px;
-      margin-bottom: 10px;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      margin-bottom: 10px;
     }
-    #cartItems .cart-item strong,
-    #cartItems .cart-item span {
+    #cartItems div strong {
       color: #1e1a1a;
+      font-weight: 700;
     }
-    #cartItems .cart-item .item-price {
+    #cartItems div span {
+      color: #333;
+      font-weight: 500;
+    }
+    #cartItems div .item-price {
       color: #d97706;
-      font-weight: bold;
+      font-weight: 700;
       font-size: 1.1rem;
+    }
+    #cartTotal {
+      color: #d97706;
+      font-weight: 700;
     }
 
     /* Extras Modal */
@@ -186,6 +192,19 @@
     .btn-primary:hover {
       transform: scale(1.05);
       background: #d97706;
+    }
+
+    /* Customer Info Modal */
+    .form-label {
+      font-weight: 500;
+      color: #333;
+    }
+    textarea.form-control {
+      resize: vertical;
+      border-radius: 8px;
+    }
+    .form-control {
+      border-radius: 8px;
     }
 
     /* Payment Modal */
@@ -319,41 +338,6 @@
             <h5 class="card-title">Baruch Especial</h5>
             <p class="card-text">€11,50</p>
             <button class="btn btn-primary" onclick="openExtrasModal({id: 'burger3', name: 'Baruch Especial', price: 11.50, category: 'hamburgueres'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pizzas -->
-    <h4 class="category-header">🍕 Pizzas</h4>
-    <div class="row g-4 mb-5">
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/pizza1.jpg" class="card-img-top" alt="Pizza Margherita">
-          <div class="card-body">
-            <h5 class="card-title">Pizza Margherita</h5>
-            <p class="card-text">€8,00</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza1', name: 'Pizza Margherita', price: 8.00, category: 'pizzas'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/pizza2.jpg" class="card-img-top" alt="Pizza Pepperoni">
-          <div class="card-body">
-            <h5 class="card-title">Pizza Pepperoni</h5>
-            <p class="card-text">€9,50</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza2', name: 'Pizza Pepperoni', price: 9.50, category: 'pizzas'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/pizza3.jpg" class="card-img-top" alt="Pizza Quatro Queijos">
-          <div class="card-body">
-            <h5 class="card-title">Pizza Quatro Queijos</h5>
-            <p class="card-text">€10,00</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza3', name: 'Pizza Quatro Queijos', price: 10.00, category: 'pizzas'})">Adicionar</button>
           </div>
         </div>
       </div>
@@ -506,7 +490,41 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary" onclick="proceedToPayment()">Finalizar Pedido</button>
+          <button type="button" class="btn btn-primary" onclick="proceedToCustomerInfo()">Finalizar Pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Info Modal -->
+  <div class="modal fade" id="customerInfoModal" tabindex="-1" aria-labelledby="customerInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="customerInfoModalLabel">Informações do Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="customerName" class="form-label">Nome *</label>
+            <input type="text" class="form-control" id="customerName" required>
+          </div>
+          <div class="mb-3">
+            <label for="customerPhone" class="form-label">Telefone *</label>
+            <input type="tel" class="form-control" id="customerPhone" pattern="[0-9]{9,11}" placeholder="Ex: 969307121" required>
+          </div>
+          <div class="mb-3">
+            <label for="customerAddress" class="form-label">Endereço *</label>
+            <input type="text" class="form-control" id="customerAddress" required>
+          </div>
+          <div class="mb-3">
+            <label for="customerReference" class="form-label">Ponto de Referência (opcional)</label>
+            <textarea class="form-control" id="customerReference" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="confirmCustomerInfo()">Confirmar Informações</button>
         </div>
       </div>
     </div>
@@ -565,6 +583,7 @@
   <script>
     let cart = [];
     let currentItem = null;
+    let customerInfo = {};
     const whatsappNumber = "+351969307121";
 
     // Initialize Bootstrap tooltips
@@ -585,41 +604,33 @@
       extrasOptions.innerHTML = '';
       removeOptions.innerHTML = '';
 
-      // Define extras and removals based on category
-      const extrasData = {
+      const extrasConfig = {
         hamburgueres: [
-          { name: 'Bacon Extra', price: 0.50, id: 'extra1' },
-          { name: 'Molho Especial', price: 0.30, id: 'extra2' }
-        ],
-        pizzas: [
-          { name: 'Bacon Extra', price: 0.50, id: 'extra1' },
-          { name: 'Molho Especial', price: 0.30, id: 'extra2' }
+          { id: 'extra1', name: 'Bacon Extra', price: 0.50 },
+          { id: 'extra2', name: 'Molho Especial', price: 0.30 }
         ],
         acai: [
-          { name: 'Granola', price: 0.40, id: 'extra1' },
-          { name: 'Leite Condensado', price: 0.30, id: 'extra2' }
+          { id: 'extra3', name: 'Granola', price: 0.40 },
+          { id: 'extra4', name: 'Leite Condensado', price: 0.30 }
         ]
       };
 
-      const removalsData = {
+      const removalsConfig = {
         hamburgueres: [
-          { name: 'Sem Cebola', id: 'remove1' },
-          { name: 'Sem Alface', id: 'remove2' }
-        ],
-        pizzas: [
-          { name: 'Sem Cebola', id: 'remove1' },
-          { name: 'Sem Alface', id: 'remove2' }
+          { id: 'remove1', name: 'Sem Cebola' },
+          { id: 'remove2', name: 'Sem Alface' }
         ],
         acai: [
-          { name: 'Sem Granola', id: 'remove1' },
-          { name: 'Sem Frutas', id: 'remove2' }
+          { id: 'remove3', name: 'Sem Granola' },
+          { id: 'remove4', name: 'Sem Frutas' }
         ]
       };
 
-      const currentExtras = extrasData[item.category] || [];
-      const currentRemovals = removalsData[item.category] || [];
+      const category = item.category;
+      const extras = extrasConfig[category] || [];
+      const removals = removalsConfig[category] || [];
 
-      currentExtras.forEach(extra => {
+      extras.forEach(extra => {
         const div = document.createElement('div');
         div.className = 'form-check';
         div.innerHTML = `
@@ -629,7 +640,7 @@
         extrasOptions.appendChild(div);
       });
 
-      currentRemovals.forEach(removal => {
+      removals.forEach(removal => {
         const div = document.createElement('div');
         div.className = 'form-check';
         div.innerHTML = `
@@ -639,6 +650,7 @@
         removeOptions.appendChild(div);
       });
 
+      document.getElementById('extrasModalLabel').textContent = `Personalizar ${item.name}`;
       const modal = new bootstrap.Modal(document.getElementById('extrasModal'));
       modal.show();
     }
@@ -668,7 +680,7 @@
         const itemTotal = item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0);
         total += itemTotal;
         const div = document.createElement('div');
-        div.className = 'cart-item d-flex justify-content-between align-items-center';
+        div.className = 'd-flex justify-content-between align-items-center mb-2';
         div.innerHTML = `
           <div>
             <strong>${item.name}</strong>
@@ -696,12 +708,34 @@
       updateCart();
     }
 
-    function proceedToPayment() {
+    function proceedToCustomerInfo() {
       if (cart.length === 0) {
-        alert('Seu carrinho está vazio!');
+        alert('Seu carrinho está vazio! Adicione itens antes de finalizar o pedido.');
         return;
       }
-      bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+      const modal = new bootstrap.Modal(document.getElementById('customerInfoModal'));
+      modal.show();
+    }
+
+    function confirmCustomerInfo() {
+      const name = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      const address = document.getElementById('customerAddress').value.trim();
+      const reference = document.getElementById('customerReference').value.trim();
+
+      if (!name || !phone || !address) {
+        alert('Por favor, preencha todos os campos obrigatórios: Nome, Telefone e Endereço.');
+        return;
+      }
+
+      const phoneRegex = /^[0-9]{9,11}$/;
+      if (!phoneRegex.test(phone)) {
+        alert('Por favor, insira um número de telefone válido com 9 a 11 dígitos.');
+        return;
+      }
+
+      customerInfo = { name, phone, address, reference };
+      bootstrap.Modal.getInstance(document.getElementById('customerInfoModal')).hide();
       const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
       modal.show();
     }
@@ -746,9 +780,17 @@
       const orderNumber = Math.floor(10000 + Math.random() * 90000);
       let orderMessage = `*🍔 Pedido Baruch Burguer #${orderNumber}*\n\n`;
 
+      orderMessage += `*👤 Informações do Cliente*\n`;
+      orderMessage += `*Nome*: ${customerInfo.name}\n`;
+      orderMessage += `*Telefone*: ${customerInfo.phone}\n`;
+      orderMessage += `*Endereço*: ${customerInfo.address}\n`;
+      if (customerInfo.reference) {
+        orderMessage += `*Ponto de Referência*: ${customerInfo.reference}\n`;
+      }
+      orderMessage += `------------------------\n\n`;
+
       const categories = {
         hamburgueres: { name: 'Hambúrgueres', emoji: '🍔' },
-        pizzas: { name: 'Pizzas', emoji: '🍕' },
         acai: { name: 'Açaí', emoji: '🍧' },
         bebidas: { name: 'Bebidas', emoji: '🥤' },
         sobremesas: { name: 'Sobremesas', emoji: '🍰' }
@@ -760,20 +802,20 @@
           orderMessage += `${categories[category].emoji} *${categories[category].name}*\n`;
           items.forEach((item, index) => {
             const itemTotal = item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0);
-            orderMessage += `📋 Item ${index + 1}: ${item.name} (€${itemTotal.toFixed(2)})\n`;
+            orderMessage += `📋 *Item ${index + 1}*: ${item.name} (€${itemTotal.toFixed(2)})\n`;
             if (item.extras.length > 0) {
-              orderMessage += `  Extras: ${item.extras.map(e => e.name).join(', ')}\n`;
+              orderMessage += `  *Extras*: ${item.extras.map(e => e.name).join(', ')}\n`;
             }
             if (item.removals.length > 0) {
-              orderMessage += `  Retirar: ${item.removals.join(', ')}\n`;
+              orderMessage += `  *Retirar*: ${item.removals.join(', ')}\n`;
             }
             orderMessage += `------------------------\n`;
           });
         }
       });
 
-      orderMessage += `\n*Total*: €${total.toFixed(2)}\n`;
-      orderMessage += `*Pagamento*: ${paymentMethod}\n`;
+      orderMessage += `\n*💰 Total*: €${total.toFixed(2)}\n`;
+      orderMessage += `*💳 Pagamento*: ${paymentMethod}\n`;
       if (paymentMethod === 'Dinheiro') {
         const cashAmount = parseFloat(document.getElementById('cashAmount').value) || 0;
         const change = cashAmount - total;
@@ -782,16 +824,23 @@
           orderMessage += `*Troco*: €${change >= 0 ? change.toFixed(2) : '0.00'}\n`;
         }
       }
-      orderMessage += `\n*Enviado em*: ${new Date().toLocaleString('pt-BR')}`;
+      orderMessage += `\n*🕒 Enviado em*: ${new Date().toLocaleString('pt-BR')}`;
 
       const encodedMessage = encodeURIComponent(orderMessage);
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
       window.open(whatsappUrl, '_blank');
 
-      alert(`Pedido #${orderNumber} enviado para o WhatsApp!`);
+      alert(`Pedido #${orderNumber} enviado para o WhatsApp com sucesso!`);
       cart = [];
+      customerInfo = {};
+      document.getElementById('customerName').value = '';
+      document.getElementById('customerPhone').value = '';
+      document.getElementById('customerAddress').value = '';
+      document.getElementById('customerReference').value = '';
+      document.getElementById('cashAmount').value = '';
       updateCart();
       bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+      bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide(); // Ensure cart modal is closed
     }
   </script>
 </body>
