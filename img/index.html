@@ -203,11 +203,6 @@
       border-radius: 8px;
     }
 
-    /* Quantity Modal */
-    #quantityInput {
-      width: 100px;
-    }
-
     /* Payment Modal */
     #cashInput .form-label {
       font-weight: 500;
@@ -244,29 +239,6 @@
     }
     .footer a:hover {
       color: #d97706;
-    }
-
-    /* Marquee Container */
-    .marquee-container {
-      background: #2b2424;
-      border: 2px solid #d97706;
-      border-radius: 8px;
-      padding: 10px;
-      margin: 10px 0;
-      overflow: hidden;
-      width: 100%;
-      max-width: 600px;
-      color: #ffffff;
-      font-weight: 500;
-    }
-    .marquee-text {
-      display: inline-block;
-      white-space: nowrap;
-      animation: marquee 15s linear infinite;
-    }
-    @keyframes marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
     }
 
     /* Category Headers */
@@ -367,76 +339,6 @@
       </div>
     </div>
 
-    <!-- Pizzas -->
-    <h4 class="category-header">🍕 Pizzas</h4>
-    <div class="row g-4 mb-5">
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/pizza1.jpg" class="card-img-top" alt="Pizza Margherita">
-          <div class="card-body">
-            <h5 class="card-title">Pizza Margherita</h5>
-            <p class="card-text">€10,00</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza1', name: 'Pizza Margherita', price: 10.00, category: 'pizzas'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/pizza2.jpg" class="card-img-top" alt="Pizza Pepperoni">
-          <div class="card-body">
-            <h5 class="card-title">Pizza Pepperoni</h5>
-            <p class="card-text">€11,50</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza2', name: 'Pizza Pepperoni', price: 11.50, category: 'pizzas'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/pizza3.jpg" class="card-img-top" alt="Pizza Quatro Queijos">
-          <div class="card-body">
-            <h5 class="card-title">Pizza Quatro Queijos</h5>
-            <p class="card-text">€12,00</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'pizza3', name: 'Pizza Quatro Queijos', price: 12.00, category: 'pizzas'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hot Dogs -->
-    <h4 class="category-header">🌭 Hot Dogs</h4>
-    <div class="row g-4 mb-5">
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/hotdog1.jpg" class="card-img-top" alt="Hot Dog Clássico">
-          <div class="card-body">
-            <h5 class="card-title">Hot Dog Clássico</h5>
-            <p class="card-text">€5,00</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'hotdog1', name: 'Hot Dog Clássico', price: 5.00, category: 'hotdogs'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/hotdog2.jpg" class="card-img-top" alt="Hot Dog Cheddar">
-          <div class="card-body">
-            <h5 class="card-title">Hot Dog Cheddar</h5>
-            <p class="card-text">€6,00</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'hotdog2', name: 'Hot Dog Cheddar', price: 6.00, category: 'hotdogs'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="img/hotdog3.jpg" class="card-img-top" alt="Hot Dog Especial">
-          <div class="card-body">
-            <h5 class="card-title">Hot Dog Especial</h5>
-            <p class="card-text">€7,50</p>
-            <button class="btn btn-primary" onclick="openExtrasModal({id: 'hotdog3', name: 'Hot Dog Especial', price: 7.50, category: 'hotdogs'})">Adicionar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Açaí -->
     <h4 class="category-header">🍧 Açaí</h4>
     <div class="row g-4 mb-5">
@@ -452,7 +354,7 @@
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="img/acai5.png" class="card-img-top" alt="Açaí Copo 500ml">
+          <img src="img/acai2.jpg" class="card-img-top" alt="Açaí Copo 500ml">
           <div class="card-body">
             <h5 class="card-title">Açaí Copo 500ml</h5>
             <p class="card-text">€5,50</p>
@@ -477,31 +379,31 @@
     <div class="row g-4 mb-5">
       <div class="col-md-4">
         <div class="card">
-          <img src="img/coca-cola2.png" class="card-img-top" alt="Coca-Cola 600ml">
+          <img src="img/cocacola.jpg" class="card-img-top" alt="Coca-Cola 600ml">
           <div class="card-body">
             <h5 class="card-title">Coca-Cola 600ml</h5>
             <p class="card-text">€3,50</p>
-            <button class="btn btn-primary" onclick="openQuantityModal({id: 'drink1', name: 'Coca-Cola 600ml', price: 3.50, category: 'bebidas'})">Adicionar</button>
+            <button class="btn btn-primary" onclick="addToCart({id: 'drink1', name: 'Coca-Cola 600ml', price: 3.50, category: 'bebidas'})">Adicionar</button>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="img/fanta1.png" class="card-img-top" alt="Fanta 600ml">
+          <img src="img/fanta.jpg" class="card-img-top" alt="Fanta 600ml">
           <div class="card-body">
             <h5 class="card-title">Fanta 600ml</h5>
             <p class="card-text">€3,50</p>
-            <button class="btn btn-primary" onclick="openQuantityModal({id: 'drink2', name: 'Fanta 600ml', price: 3.50, category: 'bebidas'})">Adicionar</button>
+            <button class="btn btn-primary" onclick="addToCart({id: 'drink2', name: 'Fanta 600ml', price: 3.50, category: 'bebidas'})">Adicionar</button>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="img/pepsi1.jpeg" class="card-img-top" alt="Pepsi Lata">
+          <img src="img/pepsi.jpg" class="card-img-top" alt="Pepsi Lata">
           <div class="card-body">
             <h5 class="card-title">Pepsi Lata</h5>
             <p class="card-text">€2,50</p>
-            <button class="btn btn-primary" onclick="openQuantityModal({id: 'drink3', name: 'Pepsi Lata', price: 2.50, category: 'bebidas'})">Adicionar</button>
+            <button class="btn btn-primary" onclick="addToCart({id: 'drink3', name: 'Pepsi Lata', price: 2.50, category: 'bebidas'})">Adicionar</button>
           </div>
         </div>
       </div>
@@ -512,11 +414,11 @@
     <div class="row g-4 mb-5">
       <div class="col-md-4">
         <div class="card">
-          <img src="img/milkshakechocolate1.jpeg" class="card-img-top" alt="Milkshake de Chocolate">
+          <img src="img/milkshake.jpg" class="card-img-top" alt="Milkshake de Chocolate">
           <div class="card-body">
             <h5 class="card-title">Milkshake de Chocolate</h5>
             <p class="card-text">€5,00</p>
-            <button class="btn btn-primary" onclick="openQuantityModal({id: 'dessert1', name: 'Milkshake de Chocolate', price: 5.00, category: 'sobremesas'})">Adicionar</button>
+            <button class="btn btn-primary" onclick="addToCart({id: 'dessert1', name: 'Milkshake de Chocolate', price: 5.00, category: 'sobremesas'})">Adicionar</button>
           </div>
         </div>
       </div>
@@ -526,17 +428,17 @@
           <div class="card-body">
             <h5 class="card-title">Brownie com Sorvete</h5>
             <p class="card-text">€4,50</p>
-            <button class="btn btn-primary" onclick="openQuantityModal({id: 'dessert2', name: 'Brownie com Sorvete', price: 4.50, category: 'sobremesas'})">Adicionar</button>
+            <button class="btn btn-primary" onclick="addToCart({id: 'dessert2', name: 'Brownie com Sorvete', price: 4.50, category: 'sobremesas'})">Adicionar</button>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="img/chessecakedefrutas.jpeg" class="card-img-top" alt="Cheesecake de Frutas">
+          <img src="img/cheesecake.jpg" class="card-img-top" alt="Cheesecake de Frutas">
           <div class="card-body">
             <h5 class="card-title">Cheesecake de Frutas</h5>
             <p class="card-text">€6,00</p>
-            <button class="btn btn-primary" onclick="openQuantityModal({id: 'dessert3', name: 'Cheesecake de Frutas', price: 6.00, category: 'sobremesas'})">Adicionar</button>
+            <button class="btn btn-primary" onclick="addToCart({id: 'dessert3', name: 'Cheesecake de Frutas', price: 6.00, category: 'sobremesas'})">Adicionar</button>
           </div>
         </div>
       </div>
@@ -565,28 +467,6 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary" onclick="confirmExtras()">Adicionar ao Carrinho</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Quantity Modal -->
-  <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="quantityModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="quantityModalLabel">Selecionar Quantidade</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="quantityInput" class="form-label">Quantidade</label>
-            <input type="number" class="form-control" id="quantityInput" min="1" value="1">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="confirmQuantity()">Confirmar</button>
         </div>
       </div>
     </div>
@@ -690,9 +570,6 @@
     <div class="container">
       <p>📍 Rua Fictícia, 123, Centro - Cidade, Estado</p>
       <p>📞 +351 969 307 121 | 📧 contato@baruchburguer.com</p>
-      <div class="marquee-container">
-        <span class="marquee-text">⏰ Após o recebimento do pedido, ele poderá demorar entre 30 e 40 minutos para ficar pronto.</span>
-      </div>
       <a href="https://www.google.com/maps?q=38.7223,-9.1393" target="_blank">Abrir no Google Maps</a>
       <p>&copy; 2025 Baruch Burguer. Todos os direitos reservados.</p>
     </div>
@@ -711,23 +588,9 @@
       tooltipTriggerList.forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
     });
 
-    function openQuantityModal(item) {
-      currentItem = item;
-      document.getElementById('quantityModalLabel').textContent = `Selecionar Quantidade - ${item.name}`;
-      document.getElementById('quantityInput').value = 1;
-      const modal = new bootstrap.Modal(document.getElementById('quantityModal'));
-      modal.show();
-    }
-
-    function confirmQuantity() {
-      const quantity = parseInt(document.getElementById('quantityInput').value) || 1;
-      if (quantity < 1) {
-        alert('Por favor, selecione uma quantidade válida (mínimo 1).');
-        return;
-      }
-      cart.push({ ...currentItem, quantity, extras: [], removals: [] });
+    function addToCart(item) {
+      cart.push({ ...item, extras: [], removals: [] });
       updateCart();
-      bootstrap.Modal.getInstance(document.getElementById('quantityModal')).hide();
     }
 
     function openExtrasModal(item) {
@@ -745,14 +608,6 @@
         acai: [
           { id: 'extra3', name: 'Granola', price: 0.40 },
           { id: 'extra4', name: 'Leite Condensado', price: 0.30 }
-        ],
-        pizzas: [
-          { id: 'extra5', name: 'Borda Recheada', price: 1.00 },
-          { id: 'extra6', name: 'Queijo Extra', price: 0.80 }
-        ],
-        hotdogs: [
-          { id: 'extra7', name: 'Batata Palha', price: 0.30 },
-          { id: 'extra8', name: 'Molho Picante', price: 0.20 }
         ]
       };
 
@@ -764,14 +619,6 @@
         acai: [
           { id: 'remove3', name: 'Sem Granola' },
           { id: 'remove4', name: 'Sem Frutas' }
-        ],
-        pizzas: [
-          { id: 'remove5', name: 'Sem Orégano' },
-          { id: 'remove6', name: 'Sem Tomate' }
-        ],
-        hotdogs: [
-          { id: 'remove7', name: 'Sem Maionese' },
-          { id: 'remove8', name: 'Sem Ketchup' }
         ]
       };
 
@@ -813,7 +660,7 @@
       document.querySelectorAll('#removeOptions .form-check-input:checked').forEach(input => {
         removals.push(input.dataset.name);
       });
-      cart.push({ ...currentItem, extras, removals, quantity: currentItem.quantity || 1 });
+      cart.push({ ...currentItem, extras, removals });
       updateCart();
       bootstrap.Modal.getInstance(document.getElementById('extrasModal')).hide();
     }
@@ -824,17 +671,15 @@
       const cartTotal = document.getElementById('cartTotal');
       cartItems.innerHTML = '';
       let total = 0;
-      let totalItems = 0;
 
       cart.forEach((item, index) => {
-        const itemTotal = (item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0)) * item.quantity;
+        const itemTotal = item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0);
         total += itemTotal;
-        totalItems += item.quantity;
         const div = document.createElement('div');
         div.className = 'd-flex justify-content-between align-items-center mb-2';
         div.innerHTML = `
           <div>
-            <strong>${item.name} (x${item.quantity})</strong>
+            <strong>${item.name}</strong>
             ${item.extras.length > 0 ? '<br><span>Extras: ' + item.extras.map(e => e.name).join(', ') + '</span>' : ''}
             ${item.removals.length > 0 ? '<br><span>Retirar: ' + item.removals.join(', ') + '</span>' : ''}
           </div>
@@ -846,7 +691,7 @@
         cartItems.appendChild(div);
       });
 
-      cartCount.textContent = totalItems;
+      cartCount.textContent = cart.length;
       cartTotal.textContent = total.toFixed(2);
       // Reinitialize tooltips for newly added items
       const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -896,7 +741,7 @@
       const cashInput = document.getElementById('cashInput');
       const cashAmount = document.getElementById('cashAmount');
       const changeAmount = document.getElementById('changeAmount');
-      const total = cart.reduce((sum, item) => sum + (item.price + item.extras.reduce((s, e) => s + e.price, 0)) * item.quantity, 0);
+      const total = cart.reduce((sum, item) => sum + item.price + item.extras.reduce((s, e) => s + e.price, 0), 0);
 
       if (paymentMethod === 'Dinheiro') {
         cashInput.style.display = 'block';
@@ -918,7 +763,7 @@
 
     function confirmOrder() {
       const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-      const total = cart.reduce((sum, item) => sum + (item.price + item.extras.reduce((s, e) => s + e.price, 0)) * item.quantity, 0);
+      const total = cart.reduce((sum, item) => sum + item.price + item.extras.reduce((s, e) => s + e.price, 0), 0);
 
       if (paymentMethod === 'Dinheiro') {
         const cashAmount = parseFloat(document.getElementById('cashAmount').value) || 0;
@@ -942,8 +787,6 @@
 
       const categories = {
         hamburgueres: { name: 'Hambúrgueres', emoji: '🍔' },
-        pizzas: { name: 'Pizzas', emoji: '🍕' },
-        hotdogs: { name: 'Hot Dogs', emoji: '🌭' },
         acai: { name: 'Açaí', emoji: '🍧' },
         bebidas: { name: 'Bebidas', emoji: '🥤' },
         sobremesas: { name: 'Sobremesas', emoji: '🍰' }
@@ -954,8 +797,8 @@
         if (items.length > 0) {
           orderMessage += `${categories[category].emoji} *${categories[category].name}*\n`;
           items.forEach((item, index) => {
-            const itemTotal = (item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0)) * item.quantity;
-            orderMessage += `📋 *Item ${index + 1}*: ${item.name} (x${item.quantity}) (€${itemTotal.toFixed(2)})\n`;
+            const itemTotal = item.price + item.extras.reduce((sum, extra) => sum + extra.price, 0);
+            orderMessage += `📋 *Item ${index + 1}*: ${item.name} (€${itemTotal.toFixed(2)})\n`;
             if (item.extras.length > 0) {
               orderMessage += `  *Extras*: ${item.extras.map(e => e.name).join(', ')}\n`;
             }
@@ -979,7 +822,11 @@
       }
       orderMessage += `\n*🕒 Enviado em*: ${new Date().toLocaleString('pt-BR')}`;
 
-      // Clear cart and input fields
+      const encodedMessage = encodeURIComponent(orderMessage);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      window.open(whatsappUrl, '_blank');
+
+      alert(`Pedido #${orderNumber} enviado para o WhatsApp com sucesso!`);
       cart = [];
       customerInfo = {};
       document.getElementById('customerName').value = '';
@@ -987,22 +834,8 @@
       document.getElementById('customerAddress').value = '';
       document.getElementById('customerReference').value = '';
       document.getElementById('cashAmount').value = '';
-
-      // Update cart display to reflect cleared cart
       updateCart();
-
-      // Close all modals
       bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
-      const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
-      if (cartModal) {
-        cartModal.hide();
-      }
-
-      const encodedMessage = encodeURIComponent(orderMessage);
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-      window.open(whatsappUrl, '_blank');
-
-      alert(`Pedido #${orderNumber} enviado para o WhatsApp com sucesso!`);
     }
   </script>
 </body>
